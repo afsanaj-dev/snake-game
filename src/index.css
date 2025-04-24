@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(50deg, #1282b7, #2a1834);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  -webkit-box-shadow: 2px 6px 58px 6px rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: 2px 6px 58px 6px rgba(0, 0, 0, 0.41);
+  box-shadow: 2px 6px 58px 6px rgba(0, 0, 0, 0.41);
+  backdrop-filter: blur(10px);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-button button {
+  background-color: #042330;
+  display: inline-block;
+  color: #fff;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  text-align: center;
+  border: 0;
+  border-radius: 8px;
+}
+.game-button .playGame{
+  color: #ff0066;
+}
+
+.game-board {
+  display: grid;
+  border: 3px solid #1c7f9a;
+  background: #2a1834;
+  border-radius: 10px;
+}
+
+.cell {
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.score {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.snake {
+  background: linear-gradient(45deg, #00ff88, #00ccff);
+  border-radius: 6px;
+  animation: pulse 1.5s infinite;
+  -webkit-box-shadow: 2px 6px 58px 6px rgba(0, 255, 136, 0.3);
+  -moz-box-shadow: 2px 6px 58px 6px rgba(0, 255, 136, 0.3);
+  box-shadow: 2px 6px 58px 6px rgba(0, 255, 136, .3);
+}
+
+.food {
+  background: #ff0066;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px rgba(255, 0, 102, 0.5), 0px 0px 20px rgba(255, 0, 102, 0.5);
+  animation: glow 1.5s infinite alternate;
+}
+
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  animation: fadeIn 0.5s;
+}
+
+.game-over h2 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.game-over button {
+  background: #ff0066;
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 18px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0% {
+    background: #ff0066;
+  }
+
+  100% {
+    background: #ea6298;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
