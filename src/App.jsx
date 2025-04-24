@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { FaPause } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa";
-import { FaStop } from "react-icons/fa";
 
 function App() {
   // fixed variable diclaration
@@ -34,6 +33,7 @@ function App() {
       : newFood;
   };
 
+  // snake move handeling
   const moveSnake = () => {
     if (gameOver) return;
 
@@ -61,7 +61,7 @@ function App() {
       head.y >= GRID_SIZE ||
       snake.some((item) => item.x === head.x && item.y === head.y)
     ) {
-      setgameOver(true)
+      setgameOver(true);
       return;
     }
     const newSnake = [head, ...snake];
@@ -69,10 +69,12 @@ function App() {
       setscore(score + 1);
       setFood(generateFood());
     } else {
-      newSnake.pop()
+      newSnake.pop();
     }
     setSnake(newSnake);
   };
+
+  // handle key press
   useEffect(() => {
     const handleKeyPress = (e) => {
       switch (e.key) {
@@ -98,14 +100,16 @@ function App() {
     };
   }, [direction]);
 
+  // set movement with time interval
   useEffect(() => {
-    if (!startGame ||pauseGame|| gameOver) return;
+    if (!startGame || pauseGame || gameOver) return;
     const gameLoop = setInterval(moveSnake, 100);
     return () => {
       clearInterval(gameLoop);
     };
-  }, [snake, direction, gameOver,startGame,pauseGame]);
+  }, [snake, direction, gameOver, startGame, pauseGame]);
 
+  // 
   const renderGrid = () => {
     const grid = [];
 
@@ -118,37 +122,57 @@ function App() {
             key={`${i}-${j}`}
             className={`cell ${isSnake ? "snake" : ""} ${isFood ? "food" : ""}`}
           ></div>
-        )
+        );
       }
     }
 
     return grid;
   };
 
-  let handleGameStart = () => {
-    setstartGame(true)
-    setSnake(INITIAL_SNAKE)
-    setFood(INITIAL_FOOD)
-    setdirection(INITIAL_DIRECTION)
-    setscore(0)
-    setgameOver(false)
-  }
+  const handleStartPause = () => {
+    if (gameOver) return;
 
-  let handleGamePause = () => {
-    if (startGame && !gameOver) {
-      setpauseGame(prev => !prev);   
+    if (!startGame) {
+      // Start the game
+      setstartGame(true);
+      setpauseGame(false);
+      setSnake(INITIAL_SNAKE);
+      setFood(INITIAL_FOOD);
+      setdirection(INITIAL_DIRECTION);
+      setscore(0);
+      setgameOver(false);
+    } else {
+      // Toggle pause/resume
+      setpauseGame((prev) => !prev);
     }
-  }
+  };
+
+  let restartGame = () => {
+    setstartGame(true);
+    setSnake(INITIAL_SNAKE);
+    setFood(INITIAL_FOOD);
+    setdirection(INITIAL_DIRECTION);
+    setscore(0);
+    setgameOver(false);
+  };
+  // let handleGamePause = () => {
+  //   if (startGame && !gameOver) {
+  //     setpauseGame(prev => !prev);
+  //   }
+  // }
 
   return (
     <div className="game-container">
       <div className="top-bar">
         <div className="score">Score: {score}</div>
         <div className="game-button">
-            <button onClick={handleGameStart} className="playGame"> <FaPlay /></button>
+          <button onClick={handleStartPause} className="playPauseBtn">
+            {!startGame || pauseGame ? <FaPlay /> : <FaPause />}
+          </button>
+          {/* <button onClick={handleGameStart} className="playGame"> <FaPlay /></button>
           <button onClick={handleGamePause} className="pauseGame">
             {pauseGame? <FaStop /> : <FaPause />}
-            </button>
+            </button> */}
         </div>
       </div>
       <div
@@ -165,8 +189,8 @@ function App() {
       {gameOver && (
         <div className="game-over">
           <h2>Game Over</h2>
-          <p className="score">Your Score : { score}</p>
-          <button onClick={()=>handleGameStart()}>Restart</button>
+          <p className="score">Your Score : {score}</p>
+          <button onClick={restartGame}>Restart</button>
         </div>
       )}
     </div>
