@@ -5,8 +5,8 @@ import { FaPlay } from "react-icons/fa";
 
 function App() {
   // fixed variable diclaration
-  const GRID_SIZE = 25;
-  const CELL_SIZE = 25;
+  const GRID_SIZE = 20;
+  const CELL_SIZE = 20;
   const INITIAL_SNAKE = [{ x: 10, y: 10 }];
   const INITIAL_FOOD = { x: 15, y: 15 };
   const INITIAL_DIRECTION = "RIGHT";
