@@ -38,9 +38,6 @@ body {
   border: 0;
   border-radius: 8px;
 }
-.game-button .playGame{
-  color: #ff0066;
-}
 
 .game-board {
   display: grid;

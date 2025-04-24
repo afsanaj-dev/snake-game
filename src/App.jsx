@@ -109,7 +109,7 @@ function App() {
     };
   }, [snake, direction, gameOver, startGame, pauseGame]);
 
-  // 
+  // Grid rendering
   const renderGrid = () => {
     const grid = [];
 
@@ -155,26 +155,24 @@ function App() {
     setscore(0);
     setgameOver(false);
   };
-  // let handleGamePause = () => {
-  //   if (startGame && !gameOver) {
-  //     setpauseGame(prev => !prev);
-  //   }
-  // }
+
 
   return (
     <div className="game-container">
       <div className="top-bar">
         <div className="score">Score: {score}</div>
+
+        {/* Game play & pause button */}
+
         <div className="game-button">
           <button onClick={handleStartPause} className="playPauseBtn">
             {!startGame || pauseGame ? <FaPlay /> : <FaPause />}
           </button>
-          {/* <button onClick={handleGameStart} className="playGame"> <FaPlay /></button>
-          <button onClick={handleGamePause} className="pauseGame">
-            {pauseGame? <FaStop /> : <FaPause />}
-            </button> */}
         </div>
       </div>
+
+      {/* game board */}
+
       <div
         className="game-board"
         style={{
@@ -184,8 +182,9 @@ function App() {
         }}
       >
         {renderGrid()}
-        {/* <div className="snake"></div> */}
       </div>
+
+      {/* Restarting game */}
       {gameOver && (
         <div className="game-over">
           <h2>Game Over</h2>
